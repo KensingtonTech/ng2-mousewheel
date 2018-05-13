@@ -1,27 +1,60 @@
-# Ng2Mousewheel
+# ng2-mousewheel
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.0.
+An Angular directive for cross-browser mousewheel support by making use of the hamster.js library.
 
-## Development server
+It is built using Angular CLI 6 library support, so it may not work on Angular versions 2 through 5 (please excuse the 'ng2' moniker).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Installation
 
-## Code scaffolding
+`npm install ng2-mousewheel --save`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### angular.json:
+```json
+"projects": {
+    "my-angular-app": {
+      "architect": {
+        "build": {
+          "options": {
+            "scripts": [
+              "node_modules/@kensingtontech/hamsterjs/hamster.js"
+            ]
+            ...
+```
 
-## Build
+### app.module.ts:
+```typescript
+import { Ng2MousewheelModule } from 'ng2-mousewheel';
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+@NgModule({
+  imports: [ Ng2MousewheelModule ],
+  ...
+})
 
-## Running unit tests
+export class MyAppModule { }
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Usage
 
-## Running end-to-end tests
+This library exposes a directive called 'kwheel', which will emit a normalised mousewheel event.  The event handler is run outside of the Angular zone, so a kwheel event will not trigger change detection.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+```typescript
+@Component({
+  selector: 'my-component'
+  template: `<div (kwheel)="onMouseWheel($event)"></div>`
+})
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+export class MyComponent {
+
+  public onMouseWheel(event): void {
+    // your wheel handler goes here
+  }
+
+}
+```
+
+Please note that this implementation uses passive event listeners.  If you need support for traditional listeners, do let me know.
+
+## Reference
+
+[Hamster.js Github page](https://github.com/monospaced/hamster.js)

@@ -1,0 +1,18 @@
+{
+  "name": "ng2-mousewheel",
+  "version": "0.9.5",
+  "author": "Tim Underhay",
+  "license": "MIT",
+  "homepage": "https://github.com/kensingtontech/ng2-mousewheel",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KensingtonTech/ng2-mousewheel.git"
+  },
+  "dependencies": {
+    "@kensingtontech/hamsterjs": "~1.1.6"
+  },
+  "peerDependencies": {
+    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
+    "@angular/core": "^6.0.0-rc.0 || ^6.0.0"
+  }
+}
